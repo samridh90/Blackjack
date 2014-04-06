@@ -10,16 +10,20 @@ import java.util.*;
 public class CardDeck {
 	
 	/**
+	 * Number of decks; 1 by default
+	 */
+	private static final int NUM_DECKS = 1; 
+	/**
 	 * Singleton instance of the CardDeck
 	 */
 	private static CardDeck instance = null;
 	/**
-	 * Collection of cards representing a 52 card deck
+	 * Collection of cards representing a 52 * NUM_DECKS card deck
 	 */
 	private ArrayList<Card> deck = new ArrayList<Card>();
 
 	/**
-	 * Private constructor that initializes deck with 52 new cards
+	 * Private constructor that initializes deck with 52 * NUM_DECKS new cards
 	 */
 	private CardDeck() {
 		this.initializeDeck();
@@ -39,14 +43,17 @@ public class CardDeck {
 	}
 
 	/**
-	 * Clear deck and initialize it with 52 new cards. 
+	 * Clear deck and initialize it with 52 * NUM_DECKS new cards. 
 	 */
 	private void initializeDeck() {
 		deck.clear();
 		
-		for(Card.Rank rank: Card.Rank.values()) {
-			for(Card.Suit suit: Card.Suit.values()) {
-				deck.add(new Card(rank, suit));
+		for(int i = 0; i < NUM_DECKS; i++)
+		{
+			for(Card.Rank rank: Card.Rank.values()) {
+				for(Card.Suit suit: Card.Suit.values()) {
+					deck.add(new Card(rank, suit));
+				}
 			}
 		}
 
