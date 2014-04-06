@@ -60,11 +60,11 @@ public class Blackjack {
 				int bet;
 				do {
 					bet = getBet(player.getChipCount());
-				}while(bet < MIN_BET && bet > player.getChipCount());					
+				}while(bet < MIN_BET || bet > player.getChipCount());					
 				player.setBet(bet);
 
-				player.clearHand();
-				dealer.clearHand();
+				player.hand.clear();
+				dealer.hand.clear();
 				
 				/**
 				 * Deal initial two cards to player and dealer
@@ -77,7 +77,7 @@ public class Blackjack {
 			/**
 			 * Player has blackjack. Decide who the winner of the round is.
 			 */
-			if(player.totalHandValue() == 21) {
+			if(player.hand.totalValue() == 21) {
 				decideWinner(player, dealer);
 			}
 			else {
@@ -97,7 +97,7 @@ public class Blackjack {
 						player.doubleDown();
 						break;
 				}				
-				if(player.totalHandValue() >= 21) {
+				if(player.hand.totalValue() >= 21) {
 					/**
 					 * Player has 21 or has gone bust. Decide who wins the round
 					 */
@@ -120,7 +120,7 @@ public class Blackjack {
 						dealerHit = dealer.dealerPlay();
 					}while(dealerHit);
 					
-					if(dealer.totalHandValue() <= 21) {
+					if(dealer.hand.totalValue() <= 21) {
 						/**
 						 * Dealer chose to stand, did not go bust
 						 */
@@ -135,7 +135,7 @@ public class Blackjack {
 			/**
 			 * If the user chose to stand, double-down or went bust, a new game is started
 			 */
-			firstDeal = (choice == 's' || choice == 'd' || player.totalHandValue() >= 21);
+			firstDeal = (choice == 's' || choice == 'd' || player.hand.totalValue() >= 21);
 			System.out.println("********************************************************");
 
 			if(player.getChipCount() < 1) {
@@ -143,6 +143,10 @@ public class Blackjack {
 				System.out.println("You seem to have run out of chips! :(");
 				System.out.println("You could take a break and try again in some time...");
 				System.out.println("Or you could try your luck right now... ;)");
+			}
+			else {
+				System.out.println();
+				System.out.println(String.format("You now have %s chips...", player.getChipCount()));
 			}
 			newGame = playAgain();
 		}while(newGame);
@@ -213,9 +217,9 @@ public class Blackjack {
 		
 		dealer.printGameState();
 		
-		if(player.totalHandValue() == 21) {
-			if(dealer.totalHandValue() != 21) {
-				if(player.handSize()  == 2) {
+		if(player.hand.totalValue() == 21) {
+			if(dealer.hand.totalValue() != 21) {
+				if(player.hand.size()  == 2) {
 					player.setChipCount(player.getChipCount() + (player.getBet() * 3));
 					System.out.println("You have a Blackjack hand. You WIN this round! (1:2 payout)");					
 				}
@@ -230,19 +234,19 @@ public class Blackjack {
 			}
 		}
 		else {
-			if(player.totalHandValue() > 21) {
+			if(player.hand.totalValue() > 21) {
 				System.out.println("You went BUST! :( You LOSE this round.");
 			}
-			else if (dealer.totalHandValue() > 21) {
+			else if (dealer.hand.totalValue() > 21) {
 				player.setChipCount(player.getChipCount() + (player.getBet() * 2));
 				System.out.println("The dealer went BUST. You WIN this round! (1:1 payout)");
 			}
 			else {
-				if(player.totalHandValue() > dealer.totalHandValue()) {
+				if(player.hand.totalValue() > dealer.hand.totalValue()) {
 					player.setChipCount(player.getChipCount() + (player.getBet() * 2));
 					System.out.println("You have a higher hand value than the dealer. You WIN this round! (1:1 payout)");
 				}
-				else if(player.totalHandValue() < dealer.totalHandValue()) {
+				else if(player.hand.totalValue() < dealer.hand.totalValue()) {
 					System.out.println("You have lower hand value than the dealer. You LOSE this round :(");
 				}
 				else {

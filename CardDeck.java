@@ -10,7 +10,7 @@ import java.util.*;
 public class CardDeck {
 	
 	/**
-	 * Number of decks; 1 by default
+	 * Number of decks; set to 1; change as required
 	 */
 	private static final int NUM_DECKS = 1; 
 	/**

@@ -61,10 +61,10 @@ public class DealerGame extends Game {
 		System.out.println();
 		System.out.println("#################################################");
 		System.out.println("Dealer's cards are: ");
-		for (Card card: this.hand) {
+		for (Card card: this.hand.getCards()) {
 			System.out.println(card.toString());
 		}
-		System.out.println("Dealer's hand value is " + this.totalHandValue());
+		System.out.println("Dealer's hand value is " + this.hand.totalValue());
 		System.out.println("#################################################");
 	}
 	
@@ -73,7 +73,7 @@ public class DealerGame extends Game {
 	 * @return true if the dealer hits, false otherwise
 	 */
 	public boolean dealerPlay() {
-		if(this.totalHandValue() < 17) {
+		if(this.hand.totalValue() < 17) {
 			this.hit();
 			return true;
 		}

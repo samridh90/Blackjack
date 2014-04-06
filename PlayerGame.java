@@ -91,10 +91,10 @@ public class PlayerGame extends Game {
 		System.out.println();
 		System.out.println("#################################################");
 		System.out.println("Cards dealt to you so far are: ");
-		for (Card card: this.hand) {
+		for (Card card: this.hand.getCards()) {
 			System.out.println(card.toString());
 		}
-		System.out.println("The value of your hand is " + this.totalHandValue());
+		System.out.println("The value of your hand is " + this.hand.totalValue());
 		System.out.println("Your current bet is " + this.bet + " chips.");
 		System.out.println("You have " + this.chips + " chips left.");
 		System.out.println("#################################################");

@@ -68,7 +68,7 @@ public class Card {
 		}
 		
 		/**
-		 * Returns unicode string representation of each suit
+		 * Returns string and unicode character representation of each suit
 		 */
 		@Override
 		public String toString() {
