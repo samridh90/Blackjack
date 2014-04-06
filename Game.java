@@ -12,7 +12,7 @@ public abstract class Game {
 	 */
 	protected CardDeck gameDeck = CardDeck.getInstance();
 	/**
-	 * Cards in hand of the game participant
+	 * Hand of cards
 	 */
 	protected Hand hand = new Hand();
 

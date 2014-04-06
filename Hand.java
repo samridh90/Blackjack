@@ -17,7 +17,7 @@ public class Hand {
 	 * Constructs a Hand object
 	 */
 	public Hand() {
-		super();
+
 	}
 	
 	/**
