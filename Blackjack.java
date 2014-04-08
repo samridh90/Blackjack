@@ -209,7 +209,7 @@ public class Blackjack {
 	}
 
 	/**
-	 * Decides who won the round
+	 * Decides who wins the round
 	 * @param player the player
 	 * @param dealer the dealer
 	 */

@@ -79,12 +79,4 @@ public class DealerGame extends Game {
 		}
 		return false;
 	}
-	
-	/**
-	 * Returns true if dealer's first card is an ace
-	 * @return true if dealer's first card is ace, false otherwise
-	 */
-	public boolean isFirstCardAce() {
-		return this.firstCard.rank() == Card.Rank.ACE;
-	}
 }

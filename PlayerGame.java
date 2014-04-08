@@ -73,17 +73,6 @@ public class PlayerGame extends Game {
 	}
 	
 	/**
-	 * Draws a card from the deck and adds it to the hand
-	 * @param reason reason for drawing a card
-	 */
-	private void addCard(String reason) {
-		Card nextCard = this.gameDeck.drawCard();
-		this.hand.add(nextCard);
-		System.out.println(String.format("%s You were dealt a(n) %s", reason, nextCard.toString()));
-		this.printGameState();
-	}
-	
-	/**
 	 * Prints the game state for the Player
 	 */
 	@Override
@@ -144,5 +133,16 @@ public class PlayerGame extends Game {
 	 */
 	public String getName() {
 		return this.name;
+	}
+	
+	/**
+	 * Draws a card from the deck and adds it to the hand
+	 * @param reason reason for drawing a card
+	 */
+	private void addCard(String reason) {
+		Card nextCard = this.gameDeck.drawCard();
+		this.hand.add(nextCard);
+		System.out.println(String.format("%s You were dealt a(n) %s", reason, nextCard.toString()));
+		this.printGameState();
 	}
 }
