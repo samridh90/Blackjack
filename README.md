@@ -10,6 +10,7 @@ A simple text-based blackjack game
 ###Instructions
 
 - Download the contents of the repository to a folder locally.
+- Change directory to the Blackjack folder
 - Compile the Blackjack.java file using `javac Blackjack.java`
 - You should now see *.class files corresponding to all the *.java files
 - To run the game, use `java Blackjack`
