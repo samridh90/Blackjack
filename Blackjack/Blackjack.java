@@ -50,6 +50,7 @@ public class Blackjack {
 		 * Outer loop runs as long as player wants to continue playing 
 		 */
 		do {
+			boolean canDoubleDown = true;
 			if(firstDeal){
 				/**
 				 * Initial deal for the round
@@ -72,8 +73,6 @@ public class Blackjack {
 				 */
 				player.firstDeal();
 				dealer.firstDeal();
-				
-				firstDeal = false;
 			}
 			/**
 			 * Player has blackjack. Decide who the winner of the round is.
@@ -85,7 +84,8 @@ public class Blackjack {
 				/**
 				 * Ask the player what they want to do next based on cards dealt till now
 				 */
-				choice = getUserChoice();
+				canDoubleDown = canDoubleDown && firstDeal;
+				choice = getUserChoice(canDoubleDown);
 				
 				switch(choice) {
 					case 'h': 
@@ -95,23 +95,25 @@ public class Blackjack {
 						player.stand();
 						break;
 					case 'd':
-						player.doubleDown();
+						canDoubleDown = player.doubleDown();
 						break;
-				}				
+				}
 				if(player.hand.totalValue() >= 21) {
 					/**
 					 * Player has 21 or has gone bust. Decide who wins the round
 					 */
 					decideWinner(player, dealer);
-				}
-				else if(choice == 'h') {
+				} else if(choice == 'h' || (firstDeal && !canDoubleDown)) {
 					/**
-					 * If the player hits, continue and ask them what they want to do next  
+					 * If the player hits or can't double down,
+					 * continue and ask them what they want to do next  
 					 */
+					if(firstDeal) {
+						firstDeal = false;
+					}
 					System.out.println();
 					continue;
-				}
-				else {
+				} else {
 					/**
 					 * It's the dealer's turn to play
 					 */
@@ -136,7 +138,9 @@ public class Blackjack {
 			/**
 			 * If the players chose to stand, double-down or went bust, a new game is started
 			 */
-			firstDeal = (choice == 's' || choice == 'd' || player.hand.totalValue() >= 21);
+			firstDeal = (choice == 's' ||
+						(choice == 'd' && canDoubleDown) ||
+						 player.hand.totalValue() >= 21);
 			System.out.println("********************************************************");
 
 			if(player.getChipCount() < 1) {
@@ -188,7 +192,7 @@ public class Blackjack {
 	 * Gets the user's choice
 	 * @return 'h', 's' or 'd'
 	 */
-	private static char getUserChoice() {
+	private static char getUserChoice(boolean canDoubleDown) {
 		char choice;
 		boolean invalid = false;
 		
@@ -196,13 +200,18 @@ public class Blackjack {
 			invalid = false;
 			System.out.println();
 			System.out.println("What do you choose to do next?");
-			System.out.print("HIT (h), STAND (s) or DOUBLE-DOWN (d): ");
+			if (canDoubleDown) {
+				System.out.print("HIT (h), STAND (s) or DOUBLE-DOWN (d): ");
+			} else {
+				System.out.print("HIT (h) or STAND (s): ");
+			}
 			choice = textScanner.next().toLowerCase().charAt(0);
 			
 			switch(choice) {
 				case 'h': break;
 				case 's': break;
-				case 'd': break;
+				case 'd': invalid = !canDoubleDown;
+						  break;
 				default: invalid = true;
 			};
 		}while(invalid);

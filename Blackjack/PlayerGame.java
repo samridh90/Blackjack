@@ -66,13 +66,17 @@ public class PlayerGame extends Game {
 	/**
 	 * Doubles player's bet, draws a card, adds it to the hand
 	 */
-	public void doubleDown() {
+	public boolean doubleDown() {
+		if(this.chips < this.bet) {
+			System.out.println("You don't have enough chips to double down!");
+			return false;
+		} 
 		this.chips -= this.bet;
 		this.bet *= 2;
 		
 		this.addCard("You chose to double-down.");
+		return true;
 	}
-	
 	/**
 	 * Prints the game state for the Player
 	 */
