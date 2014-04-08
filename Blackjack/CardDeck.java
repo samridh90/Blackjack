@@ -1,3 +1,4 @@
+package Blackjack;
 /**
  * A simple text based BlackJack.
  */
@@ -61,7 +62,8 @@ public class CardDeck {
 	}
 
 	/**
-	 * Returns a random card drawn from the deck, removes the card from the deck 
+	 * Returns a random card drawn from the deck, removes the card from the deck
+	 * Initializes a new deck if the current deck is empty 
 	 * <p>
 	 * @return random card drawn from deck
 	 */

@@ -1,3 +1,4 @@
+package Blackjack;
 /**
  * A simple text based Blackjack.
  */
@@ -18,7 +19,7 @@ public class Blackjack {
 	 */
 	private static final int INITIAL_CHIPS = 100;
 	/**
-	 * String scanner to accept input from user
+	 * String scanner to accept input from player
 	 */
 	private static final Scanner textScanner = new Scanner(System.in);
 	/**
@@ -40,13 +41,13 @@ public class Blackjack {
 		 */
 		DealerGame dealer = new DealerGame();
 		/**
-		 * Variables for user's choice, play again and to check if this is the first time dealing
+		 * Variables for player's choice, play again and to check if this is the first time dealing
 		 */
 		char choice = 'x';
 		boolean newGame = true;
 		boolean firstDeal = true;
 		/**
-		 * Outer loop runs as long as user wants to continue playing 
+		 * Outer loop runs as long as player wants to continue playing 
 		 */
 		do {
 			if(firstDeal){
@@ -82,7 +83,7 @@ public class Blackjack {
 			}
 			else {
 				/**
-				 * Ask the user what they want to do next based on cards dealt till now
+				 * Ask the player what they want to do next based on cards dealt till now
 				 */
 				choice = getUserChoice();
 				
@@ -105,7 +106,7 @@ public class Blackjack {
 				}
 				else if(choice == 'h') {
 					/**
-					 * If the player hits, continue and ask the user what they want to do next  
+					 * If the player hits, continue and ask them what they want to do next  
 					 */
 					System.out.println();
 					continue;
@@ -133,7 +134,7 @@ public class Blackjack {
 				}
 			}
 			/**
-			 * If the user chose to stand, double-down or went bust, a new game is started
+			 * If the players chose to stand, double-down or went bust, a new game is started
 			 */
 			firstDeal = (choice == 's' || choice == 'd' || player.hand.totalValue() >= 21);
 			System.out.println("********************************************************");
@@ -141,8 +142,9 @@ public class Blackjack {
 			if(player.getChipCount() < 1) {
 				System.out.println();
 				System.out.println("You seem to have run out of chips! :(");
-				System.out.println("You could take a break and try again in some time...");
-				System.out.println("Or you could try your luck right now... ;)");
+				System.out.println("The house wins this time.");
+				System.out.println("Better luck next time!");
+				break;
 			}
 			else {
 				System.out.println();
