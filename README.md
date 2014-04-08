@@ -5,7 +5,7 @@ A simple text-based blackjack game
 
 ###Prerequisites
 
-- You will need to have JDK and JRE installed on your system to be able to compile and run the game.
+- You will need to have JDK and JRE installed on your system to be able to compile and run the game (version > 1.6.0_45).
 
 ###Instructions
 
