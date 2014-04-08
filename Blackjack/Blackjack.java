@@ -50,6 +50,9 @@ public class Blackjack {
 		 * Outer loop runs as long as player wants to continue playing 
 		 */
 		do {
+			/**
+			 * Flag to check if the player can double-down
+			 */
 			boolean canDoubleDown = true;
 			if(firstDeal){
 				/**
@@ -82,9 +85,12 @@ public class Blackjack {
 			}
 			else {
 				/**
-				 * Ask the player what they want to do next based on cards dealt till now
+				 * Player can double-down only right after the first deal
 				 */
 				canDoubleDown = canDoubleDown && firstDeal;
+				/**
+				 * Ask the player what they want to do next based on cards dealt till now
+				 */
 				choice = getUserChoice(canDoubleDown);
 				
 				switch(choice) {
